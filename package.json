@@ -1,0 +1,78 @@
+{
+  "name": "swyftpain-sg",
+  "version": "0.4.32",
+  "description": "User friendly and intuitive git wrapper",
+  "keywords": [
+    "oclif"
+  ],
+  "homepage": "https://github.com/SwyftPain/sg",
+  "bugs": "https://github.com/SwyftPain/sg/issues",
+  "repository": "SwyftPain/sg",
+  "license": "MIT",
+  "author": "SwyftPain",
+  "type": "module",
+  "exports": "./lib/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "sg": "./bin/run.js"
+  },
+  "files": [
+    "/bin",
+    "/dist",
+    "/oclif.manifest.json"
+  ],
+  "scripts": {
+    "build": "shx rm -rf dist && tsc -b",
+    "lint": "eslint . --ext .ts",
+    "prepack": "pnpm run build && oclif manifest && oclif readme",
+    "postpack": "shx rm -f oclif.manifest.json",
+    "prepare": "pnpm run build",
+    "test": "mocha --forbid-only \"test/**/*.test.ts\"",
+    "posttest": "pnpm run lint",
+    "version": "oclif readme && git add README.md"
+  },
+  "oclif": {
+    "bin": "sg",
+    "commands": "./dist/commands",
+    "dirname": "sg",
+    "plugins": [
+      "@oclif/plugin-help",
+      "@oclif/plugin-plugins"
+    ],
+    "topicSeparator": " ",
+    "topics": {
+      "save": {
+        "description": "Push to github"
+      }
+    }
+  },
+  "dependencies": {
+    "@oclif/core": "^3",
+    "@oclif/plugin-help": "^6",
+    "@oclif/plugin-plugins": "^5",
+    "@types/inquirer": "^9.0.7",
+    "inquirer": "^9.2.17",
+    "ora": "^8.0.1",
+    "simple-git": "^3.24.0"
+  },
+  "devDependencies": {
+    "@oclif/prettier-config": "^0.2.1",
+    "@oclif/test": "^3",
+    "@types/chai": "^4",
+    "@types/mocha": "^10",
+    "@types/node": "^18",
+    "chai": "^4",
+    "eslint": "^8",
+    "eslint-config-oclif": "^5",
+    "eslint-config-oclif-typescript": "^3",
+    "eslint-config-prettier": "^9.1.0",
+    "mocha": "^10",
+    "oclif": "^4.7.6",
+    "shx": "^0.3.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
